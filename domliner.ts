@@ -1,5 +1,5 @@
 ﻿interface DOMDecorations {
-    properties?: { [key: string]: any };
+    [key: string]: any;
 }
 
 class DOMLiner {
