@@ -8,4 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
             document.createTextNode("This is made by "),
             liner.element("strong", null, "DOMLiner")
         ]))
+    content.appendChild(
+        liner.element("p", null, [
+            document.createTextNode("DOMLiner is available on "),
+            liner.element("a", { href: "https://github.com/SaschaNaz/DOMLiner" }, "GitHub")
+        ]))
 });
