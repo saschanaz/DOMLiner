@@ -22,6 +22,11 @@
         }
         return tag;
     };
+
+    DOMLiner.element = function (tagName, decorations, inner) {
+        return this._globalLiner.element(tagName, decorations, inner);
+    };
+    DOMLiner._globalLiner = new DOMLiner(self.document);
     return DOMLiner;
 })();
 //# sourceMappingURL=domliner.js.map

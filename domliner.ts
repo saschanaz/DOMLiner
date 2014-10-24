@@ -26,4 +26,12 @@ class DOMLiner {
         }
         return tag;
     }
+
+    private static _globalLiner = new DOMLiner(self.document);
+
+    static element(tagName: string, decorations?: DOMDecorations, children?: Node[]): Element
+    static element(tagName: string, decorations?: DOMDecorations, textContent?: string): Element
+    static element(tagName: string, decorations?: DOMDecorations, inner?: any) {
+        return this._globalLiner.element(tagName, decorations, inner);
+    }
 }
