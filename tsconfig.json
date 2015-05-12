@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "noImplicitAny": true,
+    "sourceMap": true
+  },
+  "files": [
+    "domliner.ts"
+  ]
+}

@@ -1,4 +1,4 @@
-﻿var DOMLiner = (function () {
+var DOMLiner = (function () {
     function DOMLiner(document) {
         this.document = document;
     }
@@ -14,17 +14,18 @@
         }
         if (inner) {
             if (Array.isArray(inner))
-                inner.forEach(function (child) {
-                    tag.appendChild(child);
-                });
+                inner.forEach(function (child) { tag.appendChild(child); });
             else
                 tag.innerHTML = inner;
         }
         return tag;
     };
-
     DOMLiner.element = function (tagName, decorations, inner) {
         return this._globalLiner.element(tagName, decorations, inner);
+    };
+    DOMLiner.access = function (element, fn) {
+        fn(element);
+        return element;
     };
     DOMLiner._globalLiner = new DOMLiner(self.document);
     return DOMLiner;

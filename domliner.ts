@@ -34,4 +34,9 @@ class DOMLiner {
     static element(tagName: string, decorations?: DOMDecorations, inner?: any) {
         return this._globalLiner.element(tagName, decorations, inner);
     }
+
+    static access(element: Element, fn: (element: Element) => any) {
+        fn(element);
+        return element;
+    }
 }
