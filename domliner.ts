@@ -9,22 +9,42 @@ class DOMLiner {
     element(tagName: string, decorations?: DOMDecorations, children?: Node[]): Element
     element(tagName: string, decorations?: DOMDecorations, textContent?: string): Element
     element(tagName: string, decorations?: DOMDecorations, inner?: any) {
-        var tag = this.document.createElement(tagName);
+        let tag = this.document.createElement(tagName);
         if (decorations) {
-            for (var attribute in decorations) {
-                if ((<string>attribute).match(/^prop-/))
-                    (<any>tag)[(<string>attribute).slice(5)] = decorations[attribute];
-                else
+            for (let attribute in decorations) {
+                if ((<string>attribute).match(/^\./)) {
+                    this._propertyAssign(tag, (<string>attribute).slice(1), decorations[attribute]);
+                }
+                else {
                     tag.setAttribute(attribute, decorations[attribute]);
+                }
             }
         }
         if (inner) {
-            if (Array.isArray(inner))
+            if (Array.isArray(inner)) {
                 inner.forEach((child: Node) => { tag.appendChild(child) });
-            else
+            }
+            else {
                 tag.innerHTML = inner;
+            }
         }
         return tag;
+    }
+    
+    private _propertyAssign(element: any, propertyAnnotation: string, propertyValue: any) {
+        // check there is another property assign marker
+        // if then slice before marker and chain _propertyAssign
+        // if not assign
+        let marker = propertyAnnotation.search(/[^\\]\./); // escape .
+        if (marker !== -1) {
+            marker++; // previous index is of preceding character 
+            let propertyName = propertyAnnotation.slice(0, marker).replace(/\\\./g, ".");
+            let innerAnnotation = propertyAnnotation.slice(marker + 1);
+            this._propertyAssign(element[propertyName], innerAnnotation, propertyValue);
+        }
+        else {
+            element[propertyAnnotation.replace(/\\\./g, ".")] = propertyValue;
+        }
     }
 
     private static _globalLiner = new DOMLiner(self.document);

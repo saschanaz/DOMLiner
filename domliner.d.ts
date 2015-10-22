@@ -6,6 +6,7 @@ declare class DOMLiner {
     constructor(document: Document);
     element(tagName: string, decorations?: DOMDecorations, children?: Node[]): Element;
     element(tagName: string, decorations?: DOMDecorations, textContent?: string): Element;
+    private _propertyAssign(element, propertyAnnotation, propertyValue);
     private static _globalLiner;
     static element(tagName: string, decorations?: DOMDecorations, children?: Node[]): Element;
     static element(tagName: string, decorations?: DOMDecorations, textContent?: string): Element;
