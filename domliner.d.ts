@@ -4,11 +4,11 @@ interface DOMDecorations {
 declare class DOMLiner {
     document: Document;
     constructor(document: Document);
-    element(tagName: string, decorations?: DOMDecorations, children?: Node[]): Element;
-    element(tagName: string, decorations?: DOMDecorations, textContent?: string): Element;
+    element<T extends Element>(tagName: string, decorations?: DOMDecorations, children?: Node[]): T;
+    element<T extends Element>(tagName: string, decorations?: DOMDecorations, textContent?: string): T;
     private _propertyAssign(element, propertyAnnotation, propertyValue);
     private static _globalLiner;
-    static element(tagName: string, decorations?: DOMDecorations, children?: Node[]): Element;
-    static element(tagName: string, decorations?: DOMDecorations, textContent?: string): Element;
-    static access(element: Element, fn: (element: Element) => any): Element;
+    static element<T extends Element>(tagName: string, decorations?: DOMDecorations, children?: Node[]): T;
+    static element<T extends Element>(tagName: string, decorations?: DOMDecorations, textContent?: string): T;
+    static access<T extends Element>(element: T, fn: (element: Element) => any): T;
 }

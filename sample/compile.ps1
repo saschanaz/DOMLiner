@@ -1,1 +1,0 @@
-tsc -sourcemap -t ES5 --noImplicitAny app.ts

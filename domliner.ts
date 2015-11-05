@@ -6,9 +6,9 @@ class DOMLiner {
     constructor(public document: Document) {
     }
 
-    element(tagName: string, decorations?: DOMDecorations, children?: Node[]): Element
-    element(tagName: string, decorations?: DOMDecorations, textContent?: string): Element
-    element(tagName: string, decorations?: DOMDecorations, inner?: any) {
+    element<T extends Element>(tagName: string, decorations?: DOMDecorations, children?: Node[]): T
+    element<T extends Element>(tagName: string, decorations?: DOMDecorations, textContent?: string): T
+    element<T extends Element>(tagName: string, decorations?: DOMDecorations, inner?: any) {
         let tag = this.document.createElement(tagName);
         if (decorations) {
             for (let attribute in decorations) {
@@ -49,13 +49,13 @@ class DOMLiner {
 
     private static _globalLiner = new DOMLiner(self.document);
 
-    static element(tagName: string, decorations?: DOMDecorations, children?: Node[]): Element
-    static element(tagName: string, decorations?: DOMDecorations, textContent?: string): Element
-    static element(tagName: string, decorations?: DOMDecorations, inner?: any) {
+    static element<T extends Element>(tagName: string, decorations?: DOMDecorations, children?: Node[]): T
+    static element<T extends Element>(tagName: string, decorations?: DOMDecorations, textContent?: string): T
+    static element<T extends Element>(tagName: string, decorations?: DOMDecorations, inner?: any) {
         return this._globalLiner.element(tagName, decorations, inner);
     }
 
-    static access(element: Element, fn: (element: Element) => any) {
+    static access<T extends Element>(element: T, fn: (element: Element) => any) {
         fn(element);
         return element;
     }
