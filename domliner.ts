@@ -55,7 +55,7 @@ class DOMLiner {
         return this._globalLiner.element(tagName, decorations, inner);
     }
 
-    static access<T extends Element>(element: T, fn: (element: Element) => any) {
+    static access<T extends Element>(element: T, fn: (element: T) => any) {
         fn(element);
         return element;
     }
