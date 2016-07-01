@@ -5,6 +5,8 @@ A helper to construct DOM in fewer script lines.
 
 A sample is available [here](//saschanaz.github.io/DOMLiner/sample).
 
+Installable via `bower install domliner`.
+
 # API
 
 ```typescript
