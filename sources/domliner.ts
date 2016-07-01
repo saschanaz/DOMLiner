@@ -6,7 +6,7 @@ class DOMLiner {
     constructor(public document: Document) {
     }
 
-    element<T extends Element>(tagName: string, decorations?: DOMDecorations, children?: Node[]): T
+    element<T extends Element>(tagName: string, decorations?: DOMDecorations, children?: (string | Node)[]): T
     element<T extends Element>(tagName: string, decorations?: DOMDecorations, textContent?: string): T
     element<T extends Element>(tagName: string, decorations?: DOMDecorations, inner?: any) {
         let tag = this.document.createElement(tagName);
@@ -22,7 +22,14 @@ class DOMLiner {
         }
         if (inner) {
             if (Array.isArray(inner)) {
-                inner.forEach((child: Node) => { tag.appendChild(child) });
+                inner.forEach((child: string | Node) => {
+                    if (typeof child === "string") {
+                        tag.appendChild(document.createTextNode(child));
+                    }
+                    else {
+                        tag.appendChild(child);
+                    }
+                });
             }
             else {
                 tag.innerHTML = inner;
@@ -49,7 +56,7 @@ class DOMLiner {
 
     private static _globalLiner = new DOMLiner(self.document);
 
-    static element<T extends Element>(tagName: string, decorations?: DOMDecorations, children?: Node[]): T
+    static element<T extends Element>(tagName: string, decorations?: DOMDecorations, children?: (string | Node)[]): T
     static element<T extends Element>(tagName: string, decorations?: DOMDecorations, textContent?: string): T
     static element<T extends Element>(tagName: string, decorations?: DOMDecorations, inner?: any) {
         return this._globalLiner.element(tagName, decorations, inner);
