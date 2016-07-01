@@ -2,9 +2,10 @@
   "compilerOptions": {
     "declaration": true,
     "noImplicitAny": true,
-    "sourceMap": true
+    "sourceMap": true,
+	"out": "built/domliner.js"
   },
   "files": [
-    "domliner.ts"
+    "sources/domliner.ts"
   ]
 }
