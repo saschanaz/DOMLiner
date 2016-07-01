@@ -1,14 +1,12 @@
-///<reference path="../domliner.ts" />
-var liner = new DOMLiner(document);
-
+///<reference path="../lib/domliner.d.ts" />
 document.addEventListener("DOMContentLoaded", function () {
-    content.appendChild(liner.element("p", null, [
-        document.createTextNode("This is made by "),
-        liner.element("strong", null, "DOMLiner")
+    content.appendChild(DOMLiner.element("p", null, [
+        "This is made by ",
+        DOMLiner.element("strong", null, "DOMLiner")
     ]));
     content.appendChild(DOMLiner.element("p", null, [
-        document.createTextNode("DOMLiner is available on "),
-        liner.element("a", { href: "https://github.com/SaschaNaz/DOMLiner" }, "GitHub")
+        "DOMLiner is available on ",
+        DOMLiner.element("a", { href: "https://github.com/SaschaNaz/DOMLiner" }, "GitHub")
     ]));
 });
 //# sourceMappingURL=app.js.map
