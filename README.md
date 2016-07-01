@@ -16,9 +16,9 @@ interface DOMDecorations {
 declare class DOMLiner {
     document: Document;
     constructor(document: Document);
-    element(tagName: string, decorations?: DOMDecorations, children?: Node[]): Element;
+    element(tagName: string, decorations?: DOMDecorations, children?: (string | Node)[]): Element;
     element(tagName: string, decorations?: DOMDecorations, textContent?: string): Element;
-    static element(tagName: string, decorations?: DOMDecorations, children?: Node[]): Element;
+    static element(tagName: string, decorations?: DOMDecorations, children?: (string | Node)[]): Element;
     static element(tagName: string, decorations?: DOMDecorations, textContent?: string): Element;
 }
 ```
