@@ -44,7 +44,7 @@ class DOMLiner {
         }
         return el;
     }
-    
+
     private _propertyAssign(element: any, propertyAnnotation: string, propertyValue: any) {
         // check there is another property assign marker
         // if then slice before marker and chain _propertyAssign
@@ -63,9 +63,14 @@ class DOMLiner {
 
     private static _globalLiner = new DOMLiner(self.document);
 
-    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T
-    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, textContent?: string): T
+    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T;
+    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, textContent?: string): T;
     static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, inner?: any) {
         return this._globalLiner.element(tagName, decorations, inner);
+    }
+
+    static access<T extends Element>(element: T, fn: (element: T) => any) {
+        fn(element);
+        return element;
     }
 }
