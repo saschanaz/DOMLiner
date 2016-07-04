@@ -63,9 +63,9 @@ class DOMLiner {
 
     private static _globalLiner = new DOMLiner(self.document);
 
-    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T;
-    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, textContent?: string): T;
-    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, inner?: any) {
+    static element<T extends Element>(tagName: string | T, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T;
+    static element<T extends Element>(tagName: string | T, decorations?: DOMDecorations<T>, textContent?: string): T;
+    static element<T extends Element>(tagName: string | T, decorations?: DOMDecorations<T>, inner?: any) {
         return this._globalLiner.element(tagName, decorations, inner);
     }
 

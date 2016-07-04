@@ -9,7 +9,7 @@ declare class DOMLiner {
     element<T extends Element>(tag: string | T, decorations?: DOMDecorations<T>, textContent?: string): T;
     private _propertyAssign(element, propertyAnnotation, propertyValue);
     private static _globalLiner;
-    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T;
-    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, textContent?: string): T;
+    static element<T extends Element>(tagName: string | T, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T;
+    static element<T extends Element>(tagName: string | T, decorations?: DOMDecorations<T>, textContent?: string): T;
     static access<T extends Element>(element: T, fn: (element: T) => any): T;
 }
