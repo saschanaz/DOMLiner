@@ -1,5 +1,5 @@
 interface DOMDecorations<T extends Element> {
-    this: (element: T) => any;
+    this?: (element: T) => any;
     [key: string]: any;
 }
 declare class DOMLiner {
