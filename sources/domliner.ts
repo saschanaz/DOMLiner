@@ -1,4 +1,5 @@
-﻿interface DOMDecorations {
+﻿interface DOMDecorations<T extends Element> {
+    this: (element: T) => any;
     [key: string]: any;
 }
 
@@ -6,17 +7,23 @@ class DOMLiner {
     constructor(public document: Document) {
     }
 
-    element<T extends Element>(tagName: string, decorations?: DOMDecorations, children?: (string | Node)[]): T
-    element<T extends Element>(tagName: string, decorations?: DOMDecorations, textContent?: string): T
-    element<T extends Element>(tagName: string, decorations?: DOMDecorations, inner?: any) {
-        let tag = this.document.createElement(tagName);
+    element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T
+    element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, textContent?: string): T
+    element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, inner?: any) {
+        const el = this.document.createElement(tagName);
         if (decorations) {
-            for (let attribute in decorations) {
+            for (const attribute in decorations) {
+                const item = decorations[attribute];
+                if (attribute === "this") {
+                    item(el);
+                    continue;
+                }
+
                 if ((<string>attribute).match(/^\./)) {
-                    this._propertyAssign(tag, (<string>attribute).slice(1), decorations[attribute]);
+                    this._propertyAssign(el, (<string>attribute).slice(1), item);
                 }
                 else {
-                    tag.setAttribute(attribute, decorations[attribute]);
+                    el.setAttribute(attribute, item);
                 }
             }
         }
@@ -24,18 +31,18 @@ class DOMLiner {
             if (Array.isArray(inner)) {
                 inner.forEach((child: string | Node) => {
                     if (typeof child === "string") {
-                        tag.appendChild(document.createTextNode(child));
+                        el.appendChild(document.createTextNode(child));
                     }
                     else {
-                        tag.appendChild(child);
+                        el.appendChild(child);
                     }
                 });
             }
             else {
-                tag.innerHTML = inner;
+                el.innerHTML = inner;
             }
         }
-        return tag;
+        return el;
     }
     
     private _propertyAssign(element: any, propertyAnnotation: string, propertyValue: any) {
@@ -56,14 +63,9 @@ class DOMLiner {
 
     private static _globalLiner = new DOMLiner(self.document);
 
-    static element<T extends Element>(tagName: string, decorations?: DOMDecorations, children?: (string | Node)[]): T
-    static element<T extends Element>(tagName: string, decorations?: DOMDecorations, textContent?: string): T
-    static element<T extends Element>(tagName: string, decorations?: DOMDecorations, inner?: any) {
+    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T
+    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, textContent?: string): T
+    static element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, inner?: any) {
         return this._globalLiner.element(tagName, decorations, inner);
-    }
-
-    static access<T extends Element>(element: T, fn: (element: T) => any) {
-        fn(element);
-        return element;
     }
 }
