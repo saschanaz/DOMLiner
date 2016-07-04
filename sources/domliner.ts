@@ -7,10 +7,10 @@ class DOMLiner {
     constructor(public document: Document) {
     }
 
-    element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T
-    element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, textContent?: string): T
-    element<T extends Element>(tagName: string, decorations?: DOMDecorations<T>, inner?: any) {
-        const el = this.document.createElement(tagName);
+    element<T extends Element>(tag: string | T, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T
+    element<T extends Element>(tag: string | T, decorations?: DOMDecorations<T>, textContent?: string): T
+    element<T extends Element>(tag: string | T, decorations?: DOMDecorations<T>, inner?: any) {
+        const el = typeof tag === "string" ? this.document.createElement(tag) : tag;
         if (decorations) {
             for (const attribute in decorations) {
                 const item = decorations[attribute];
@@ -39,7 +39,7 @@ class DOMLiner {
                 });
             }
             else {
-                el.innerHTML = inner;
+                el.textContent = inner;
             }
         }
         return el;
