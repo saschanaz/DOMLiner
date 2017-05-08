@@ -7,8 +7,8 @@ class DOMLiner {
     constructor(public document: Document) {
     }
 
-    element<T extends keyof ElementTagNameMap>(tag: T | ElementTagNameMap[T], decorations?: DOMDecorations<ElementTagNameMap[T]>, children?: (string | Node)[]): ElementTagNameMap[T];
-    element<T extends keyof ElementTagNameMap>(tag: T | ElementTagNameMap[T], decorations?: DOMDecorations<ElementTagNameMap[T]>, textContent?: string): ElementTagNameMap[T];
+    element<T extends keyof ElementTagNameMap>(tag: T, decorations?: DOMDecorations<ElementTagNameMap[T]>, children?: (string | Node)[]): ElementTagNameMap[T];
+    element<T extends keyof ElementTagNameMap>(tag: T, decorations?: DOMDecorations<ElementTagNameMap[T]>, textContent?: string): ElementTagNameMap[T];
     element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T
     element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, textContent?: string): T
     element(tag: string | Element, decorations?: DOMDecorations<any>, inner?: any) {
@@ -65,8 +65,8 @@ class DOMLiner {
 
     private static _globalLiner = new DOMLiner(self.document);
 
-    static element<T extends keyof ElementTagNameMap>(tagName: T | ElementTagNameMap[T], decorations?: DOMDecorations<ElementTagNameMap[T]>, children?: (string | Node)[]): ElementTagNameMap[T];
-    static element<T extends keyof ElementTagNameMap>(tagName: T | ElementTagNameMap[T], decorations?: DOMDecorations<ElementTagNameMap[T]>, textContent?: string): ElementTagNameMap[T];
+    static element<T extends keyof ElementTagNameMap>(tagName: T, decorations?: DOMDecorations<ElementTagNameMap[T]>, children?: (string | Node)[]): ElementTagNameMap[T];
+    static element<T extends keyof ElementTagNameMap>(tagName: T, decorations?: DOMDecorations<ElementTagNameMap[T]>, textContent?: string): ElementTagNameMap[T];
     static element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T
     static element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, textContent?: string): T
     static element(tag: string | Element, decorations?: DOMDecorations<any>, inner?: any) {
