@@ -18,7 +18,7 @@ document.body.appendChild(DOMLiner.element("div", { class: "foo" }, [
     ]
 ]));
 
-var existingElement;
+let existingElement = document.createElement("div");
 DOMLiner.element(existingElement, { class: "bar" }, [
     DOMLiner.element("i", null, "you can also manipulate existing element")
 ]);
