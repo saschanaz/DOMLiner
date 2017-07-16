@@ -11,9 +11,10 @@ Installable via `npm install domliner`.
 
 ```js
 document.body.appendChild(DOMLiner.element("div", { class: "foo" }, [
+    // "this" has a special meaning, it receives a callback where the argument is the element object being created
     DOMLiner.element("div", { this: l => l.addEventListener("click", ev => alert("clicked")) }, [
-      DOMLiner.element("img", { src: "image.png" }),
-      DOMLiner.element("span", null, "a text")
+        DOMLiner.element("img", { src: "image.png" }),
+        DOMLiner.element("span", null, "a text")
     ]
 ]));
 
