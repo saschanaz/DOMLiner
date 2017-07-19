@@ -1,6 +1,6 @@
 {
   "name": "domliner",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "A helper to construct DOM in fewer script lines.",
   "main": "lib/index.js",
   "repository": "https://github.com/SaschaNaz/DOMLiner.git",

@@ -3,7 +3,8 @@
     "declaration": true,
     "noImplicitAny": true,
     "sourceMap": true,
-	"out": "built/domliner.js"
+    "outDir": "built/",
+    "target": "es2017"
   },
   "files": [
     "sources/domliner.ts"

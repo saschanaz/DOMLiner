@@ -3,7 +3,7 @@
     [key: string]: any;
 }
 
-class DOMLiner {
+var DOMLiner = class DOMLiner {
     constructor(public document: Document) {
     }
 
@@ -63,13 +63,16 @@ class DOMLiner {
         }
     }
 
-    private static _globalLiner = new DOMLiner(self.document);
+    private static _globalLiner = typeof document !== "undefined" ? new DOMLiner(self.document) : undefined;
 
     static element<T extends keyof ElementTagNameMap>(tagName: T, decorations?: DOMDecorations<ElementTagNameMap[T]>, children?: (string | Node)[]): ElementTagNameMap[T];
     static element<T extends keyof ElementTagNameMap>(tagName: T, decorations?: DOMDecorations<ElementTagNameMap[T]>, textContent?: string): ElementTagNameMap[T];
     static element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T
     static element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, textContent?: string): T
     static element(tag: string | Element, decorations?: DOMDecorations<any>, inner?: any) {
+        if (!this._globalLiner) {
+            throw new Error("You cannot use DOMLiner.element as there is no global `document` variable in this platform. Please construct a new DOMLiner instance: `new DOMLiner(doc)`");
+        }
         return this._globalLiner.element(tag, decorations, inner);
     }
 
