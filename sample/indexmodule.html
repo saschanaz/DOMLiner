@@ -9,7 +9,7 @@
     <script src="https://rawgit.com/systemjs/systemjs/master/dist/system.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
-            const { DOMLiner } = await SystemJS.import("../lib/index.js");
+            const DOMLiner = await SystemJS.import("../lib/domliner.js");
             content.appendChild(
                 DOMLiner.element("p", null, [
                     "This is made by ",

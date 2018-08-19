@@ -1,9 +1,9 @@
-﻿interface DOMDecorations<T extends Element> {
+﻿export interface DOMDecorations<T extends Element> {
     this?: (element: T) => any;
     [key: string]: any;
 }
 
-var DOMLiner = class DOMLiner {
+export class DOMLiner {
     constructor(public document: Document) {
     }
 
@@ -62,22 +62,22 @@ var DOMLiner = class DOMLiner {
             element[propertyAnnotation.replace(/\\\./g, ".")] = propertyValue;
         }
     }
+}
 
-    private static _globalLiner = typeof document !== "undefined" ? new DOMLiner(self.document) : undefined;
+const globalLiner = typeof document !== "undefined" ? new DOMLiner(self.document) : undefined;
 
-    static element<T extends keyof ElementTagNameMap>(tagName: T, decorations?: DOMDecorations<ElementTagNameMap[T]>, children?: (string | Node)[]): ElementTagNameMap[T];
-    static element<T extends keyof ElementTagNameMap>(tagName: T, decorations?: DOMDecorations<ElementTagNameMap[T]>, textContent?: string): ElementTagNameMap[T];
-    static element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T
-    static element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, textContent?: string): T
-    static element(tag: string | Element, decorations?: DOMDecorations<any>, inner?: any) {
-        if (!this._globalLiner) {
-            throw new Error("You cannot use DOMLiner.element as there is no global `document` variable in this platform. Please construct a new DOMLiner instance: `new DOMLiner(doc)`");
-        }
-        return this._globalLiner.element(tag, decorations, inner);
+export function element<T extends keyof ElementTagNameMap>(tagName: T, decorations?: DOMDecorations<ElementTagNameMap[T]>, children?: (string | Node)[]): ElementTagNameMap[T];
+export function element<T extends keyof ElementTagNameMap>(tagName: T, decorations?: DOMDecorations<ElementTagNameMap[T]>, textContent?: string): ElementTagNameMap[T];
+export function element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T
+export function element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, textContent?: string): T
+export function element(tag: string | Element, decorations?: DOMDecorations<any>, inner?: any) {
+    if (!globalLiner) {
+        throw new Error("You cannot use DOMLiner.element as there is no global `document` variable in this platform. Please construct a new DOMLiner instance: `new DOMLiner(doc)`");
     }
+    return globalLiner.element(tag, decorations, inner);
+}
 
-    static access<T extends Element>(element: T, fn: (element: T) => any) {
-        fn(element);
-        return element;
-    }
+export function access<T extends Element>(element: T, fn: (element: T) => any) {
+    fn(element);
+    return element;
 }

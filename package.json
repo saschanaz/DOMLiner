@@ -7,7 +7,8 @@
   "repository": "https://github.com/SaschaNaz/DOMLiner.git",
   "author": "Kagami Sascha Rosylight <saschanaz@outlook.com>",
   "license": "ISC",
-  "dependencies": {
-    "glodule": "^1.0.3"
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jake": "0.0.30"
   }
 }

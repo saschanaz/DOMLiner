@@ -3,8 +3,9 @@
     "declaration": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "outDir": "built/",
-    "target": "es2017"
+    "outDir": "lib/",
+    "target": "es2017",
+    "module": "umd"
   },
   "files": [
     "sources/domliner.ts"
