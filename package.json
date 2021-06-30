@@ -7,8 +7,11 @@
   "repository": "https://github.com/SaschaNaz/DOMLiner.git",
   "author": "Kagami Sascha Rosylight <saschanaz@outlook.com>",
   "license": "ISC",
-  "dependencies": {},
+  "scripts": {
+    "build": "tsc"
+  },
+  "type": "module",
   "devDependencies": {
-    "@types/jake": "0.0.30"
+    "typescript": "^4.3.4"
   }
 }

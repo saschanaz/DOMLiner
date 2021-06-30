@@ -15,5 +15,3 @@ export declare function element<T extends keyof ElementTagNameMap>(tagName: T, d
 export declare function element<T extends keyof ElementTagNameMap>(tagName: T, decorations?: DOMDecorations<ElementTagNameMap[T]>, textContent?: string): ElementTagNameMap[T];
 export declare function element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, children?: (string | Node)[]): T;
 export declare function element<T extends Element>(tag: T, decorations?: DOMDecorations<T>, textContent?: string): T;
-export declare function access<T extends Element>(element: T, fn: (element: T) => any): T;
-export as namespace DOMLiner;

@@ -4,8 +4,8 @@
     "noImplicitAny": true,
     "sourceMap": true,
     "outDir": "lib/",
-    "target": "es2017",
-    "module": "umd"
+    "target": "es2020",
+    "module": "es2020"
   },
   "files": [
     "sources/domliner.ts"
